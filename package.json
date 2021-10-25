@@ -1,0 +1,20 @@
+{
+  "name": "i-connect",
+  "version": "1.0.0",
+  "description": "This is the documentation of i-connect, a course project of CMPUT 404 at University of Alberta.  The document is implemented by swagger ui and swagger editor which are under Apache-2.0 License. See detail about swagger and its License below",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "swagger"
+  ],
+  "license": "Unlicense",
+  "private": true,
+  "dependencies": {
+    "connect": "^3.2.0",
+    "js-yaml": "^3.3.0",
+    "oas3-tools": "^2.2.3"
+  }
+}

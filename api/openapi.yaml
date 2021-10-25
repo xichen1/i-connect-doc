@@ -1,0 +1,717 @@
+openapi: 3.0.0
+info:
+  title: i-connect
+  description: "This is the documentation of i-connect, a course project of CMPUT\
+    \ 404 at University of Alberta.  The document is implemented by swagger ui and\
+    \ swagger editor which are under Apache-2.0 License. See detail about swagger\
+    \ and its License below"
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: xichen3@ualberta.ca
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+- url: https://i-connect.herokuapp.com/service
+tags:
+- name: post
+  description: Post object related
+- name: author
+  description: Author object related
+- name: comment
+  description: Comment object related
+- name: likes
+  description: Like object to post and comment
+- name: inbox
+  description: inbox related
+paths:
+  /author/{AUTHOR_ID}/post/{POST_ID}:
+    get:
+      tags:
+      - post
+      summary: Get the public post using the post's id and the author's id
+      operationId: getPostByPostIdAndAuthorId
+      parameters:
+      - name: AUTHOR_ID
+        in: path
+        description: ID of author to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: POST_ID
+        in: path
+        description: ID of post to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        "400":
+          description: Bad request
+        "404":
+          description: Cannot find author or post
+      x-swagger-router-controller: Post
+    put:
+      tags:
+      - post
+      summary: Create a post with provided post_id
+      operationId: createAPost
+      parameters:
+      - name: AUTHOR_ID
+        in: path
+        description: ID of author to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: POST_ID
+        in: path
+        description: ID of post to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: Pet object that needs to be added to the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+        required: true
+      responses:
+        "200":
+          description: Post created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        "403":
+          description: You are not allowed to create this post
+        "404":
+          description: Author not found
+      x-swagger-router-controller: Post
+    post:
+      tags:
+      - post
+      summary: Update the post using the post's id and the author's id(not finished)
+      description: must be authenticated
+      operationId: updatePostByPostIdAndAuthorId
+      parameters:
+      - name: AUTHOR_ID
+        in: path
+        description: ID of author to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: POST_ID
+        in: path
+        description: ID of post to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        "400":
+          description: Bad request
+        "404":
+          description: Cannot find author or post
+      x-swagger-router-controller: Post
+    delete:
+      tags:
+      - post
+      summary: Delete a post by post and author id
+      operationId: deletePost
+      parameters:
+      - name: AUTHOR_ID
+        in: path
+        description: ID of author to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: POST_ID
+        in: path
+        description: ID of post to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "204":
+          description: Post deleted
+        "404":
+          description: Author/Post not found
+      x-swagger-router-controller: Post
+  /author/{AUTHOR_ID}/post/:
+    get:
+      tags:
+      - post
+      summary: Get one author's all posts
+      operationId: getAuthorRecentPosts
+      parameters:
+      - name: AUTHOR_ID
+        in: path
+        description: ID of author to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Post found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        "404":
+          description: Author/Post not found
+      x-swagger-router-controller: Post
+    post:
+      tags:
+      - post
+      summary: Create a post and generate id by backend itself
+      operationId: createAPostAndGenerateId
+      parameters:
+      - name: AUTHOR_ID
+        in: path
+        description: ID of author of the post
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: Post object that needs to be created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+        required: true
+      responses:
+        "200":
+          description: Post created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        "403":
+          description: You are not allowed to create this post
+        "404":
+          description: Author not found
+      x-swagger-router-controller: Post
+  /author/{AUTHOR_ID}/:
+    get:
+      tags:
+      - author
+      summary: Get a author object by provided author_id
+      operationId: getAuthorByAutherId
+      parameters:
+      - name: AUTHOR_ID
+        in: path
+        description: ID of author to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Author found
+      x-swagger-router-controller: Author
+  /author/{AUTHOR_ID}/posts/{POST_ID}/comments:
+    get:
+      tags:
+      - comment
+      summary: Get comments of the post by provided author and post id
+      operationId: createCommentByProvidedUserAndPost
+      parameters:
+      - name: AUTHOR_ID
+        in: path
+        description: ID of author to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: POST_ID
+        in: path
+        description: Pet object that needs to be added to the store
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Comments found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentArray'
+        "404":
+          description: Author/Post/Comment not found
+      x-swagger-router-controller: Comment
+    post:
+      tags:
+      - comment
+      summary: Create a comments of the post by provided author and post id
+      operationId: authorAUTHOR_IDPostsPOST_IDCommentsPOST
+      parameters:
+      - name: AUTHOR_ID
+        in: path
+        description: ID of author to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: POST_ID
+        in: path
+        description: Pet object that needs to be added to the store
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        description: Comment object that needs to be added to the post
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Comment'
+        required: true
+      responses:
+        "201":
+          description: Comment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        "404":
+          description: Author/Post/ not found
+      x-swagger-router-controller: Comment
+  /author/{AUTHOR_ID}/post/{POST_ID}/likes:
+    get:
+      tags:
+      - likes
+      summary: Get likes of the post by provided author and post id
+      description: GET a list of likes from other authors on author_id’s post post_id
+      operationId: getLikesOfAPostByProvidedAuthorAndPostId
+      parameters:
+      - name: AUTHOR_ID
+        in: path
+        description: ID of author to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: POST_ID
+        in: path
+        description: Pet object that needs to be added to the store
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Likes found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PostLikeArray'
+        "404":
+          description: Author/Post not found
+      x-swagger-router-controller: Likes
+  /author/{AUTHOR_ID}/post/{POST_ID}/comments/{COMMENT_ID}/likes:
+    get:
+      tags:
+      - likes
+      summary: Get likes of the post by provided author and post id
+      description: GET a list of likes from other authors on author_id’s post post_id
+      operationId: getLikesOfAPostOfACommentByProvidedAuthorAndPostId
+      parameters:
+      - name: AUTHOR_ID
+        in: path
+        description: ID of author to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: POST_ID
+        in: path
+        description: Pet object that needs to be added to the store
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: COMMENT_ID
+        in: path
+        description: Pet object that needs to be added to the store
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Likes found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CommentLikeArray'
+        "404":
+          description: Author/Post not found
+      x-swagger-router-controller: Likes
+  /author/{AUTHOR_ID}/inbox:
+    get:
+      tags:
+      - inbox
+      summary: "Get a list of posts/likes/follows sent to {AUTHOR_ID}"
+      operationId: getInboxByAuthorId
+      parameters:
+      - name: AUTHOR_ID
+        in: path
+        description: ID of author to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: Inbox found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inbox'
+        "404":
+          description: Author not found
+      x-swagger-router-controller: Inbox
+    post:
+      tags:
+      - inbox
+      summary: "Save a post/follow/like to {AUTHOR_ID}'s inbox"
+      operationId: addItemToInboxByAuthorId
+      parameters:
+      - name: AUTHOR_ID
+        in: path
+        description: ID of author to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        $ref: '#/components/requestBodies/InboxItem'
+      responses:
+        "201":
+          description: Inbox item created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inbox'
+        "400":
+          description: invalid input
+        "404":
+          description: Author not found
+      x-swagger-router-controller: Inbox
+    delete:
+      tags:
+      - inbox
+      summary: "Delete a post/follow/like to {AUTHOR_ID}'s inbox(not finished)"
+      operationId: deleteItemsInInboxByAuthorId
+      parameters:
+      - name: AUTHOR_ID
+        in: path
+        description: ID of author to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "201":
+          description: Inbox item created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Inbox'
+        "400":
+          description: invalid input
+        "404":
+          description: Author not found
+      x-swagger-router-controller: Inbox
+components:
+  schemas:
+    Post:
+      type: object
+      properties:
+        type:
+          type: string
+          example: Post
+        title:
+          type: string
+          description: title of a post
+        id:
+          type: string
+          format: uuid
+        description:
+          type: string
+          description: a brief description of the post
+        contentType:
+          type: string
+          description: The content type of the post
+        author:
+          $ref: '#/components/schemas/Author'
+        comments:
+          type: string
+          format: uuid
+        commentsSrc:
+          $ref: '#/components/schemas/Comment'
+        published:
+          type: string
+          format: date-time
+        visibility:
+          type: string
+          enum:
+          - PUBLIC
+          - FRIENDS
+          - PRIVATE
+          - SERVERONLY
+      example:
+        comments: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        visibility: PUBLIC
+        author:
+          type: type
+        description: description
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        published: 2000-01-23T04:56:07.000+00:00
+        type: Post
+        title: title
+        contentType: contentType
+        commentsSrc:
+          author: null
+          comment: comment
+          published: 2000-01-23T04:56:07.000+00:00
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          type: Comment
+          contentType: contentType
+      xml:
+        name: Order
+    Author:
+      type: object
+      properties:
+        type:
+          type: string
+      example:
+        type: type
+      xml:
+        name: Order
+    Comment:
+      type: object
+      properties:
+        type:
+          type: string
+          example: Comment
+        author:
+          $ref: '#/components/schemas/Author'
+        comment:
+          type: string
+          description: comment's content
+        contentType:
+          type: string
+        published:
+          type: string
+          format: date-time
+        id:
+          type: string
+          format: uuid
+      example:
+        author: null
+        comment: comment
+        published: 2000-01-23T04:56:07.000+00:00
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        type: Comment
+        contentType: contentType
+    CommentArray:
+      type: object
+      properties:
+        type:
+          type: string
+          example: Comments
+        id:
+          type: string
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+      example:
+        comments:
+        - author: null
+          comment: comment
+          published: 2000-01-23T04:56:07.000+00:00
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          type: Comment
+          contentType: contentType
+        - author: null
+          comment: comment
+          published: 2000-01-23T04:56:07.000+00:00
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          type: Comment
+          contentType: contentType
+        id: id
+        type: Comments
+    Like:
+      type: object
+      properties:
+        type:
+          type: string
+          example: Like
+        author:
+          $ref: '#/components/schemas/Author'
+        object:
+          type: object
+          enum:
+          - $ref: '#/components/schemas/Post'
+          - $ref: '#/components/schemas/Comment'
+      example:
+        author:
+          type: type
+        type: Like
+        object: {}
+    PostLikeArray:
+      type: object
+      properties:
+        type:
+          type: string
+          example: Likes
+        post:
+          type: string
+          format: uuid
+        likes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Like'
+      example:
+        post: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        type: Likes
+        likes:
+        - author:
+            type: type
+          type: Like
+          object: {}
+        - author:
+            type: type
+          type: Like
+          object: {}
+    CommentLikeArray:
+      type: object
+      properties:
+        type:
+          type: string
+          example: Likes
+        comment:
+          type: string
+          format: uuid
+        likes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Like'
+      example:
+        comment: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        type: Likes
+        likes:
+        - author:
+            type: type
+          type: Like
+          object: {}
+        - author:
+            type: type
+          type: Like
+          object: {}
+    Inbox:
+      type: object
+      properties:
+        type:
+          type: string
+          example: inbox
+        author:
+          $ref: '#/components/schemas/Author'
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/InboxItem'
+      example:
+        author:
+          type: type
+        type: inbox
+        items:
+        - ""
+        - ""
+    InboxItem:
+      type: object
+      oneOf:
+      - $ref: '#/components/schemas/Post'
+      - $ref: '#/components/schemas/Like'
+  requestBodies:
+    InboxItem:
+      description: Post/follow/like object that needs to be added to the inbox
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/InboxItem'
+      required: true

@@ -5,8 +5,8 @@
  * Get likes of the post by provided author and post id
  * GET a list of likes from other authors on author_id’s post post_id
  *
- * aUTHOR_ID UUID ID of author to return
- * pOST_ID UUID Pet object that needs to be added to the store
+ * aUTHOR_ID UUID ID of the post's author
+ * pOST_ID UUID ID of the post
  * returns PostLikeArray
  **/
 exports.getLikesOfAPostByProvidedAuthorAndPostId = function(aUTHOR_ID,pOST_ID) {
@@ -16,17 +16,55 @@ exports.getLikesOfAPostByProvidedAuthorAndPostId = function(aUTHOR_ID,pOST_ID) {
   "post" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "type" : "Likes",
   "likes" : [ {
-    "author" : {
-      "type" : "type"
+    "summary" : "summary string",
+    "post" : {
+      "visibility" : "PUBLIC",
+      "author" : {
+        "github_name" : "this is github name",
+        "user_name" : "this is user name",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "type" : "author"
+      },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "published" : "2000-01-23T04:56:07.000+00:00",
+      "type" : "post",
+      "title" : "this is a title",
+      "content" : "aaaaabbbbbbcccc"
     },
-    "type" : "Like",
-    "object" : { }
+    "author" : {
+      "github_name" : "this is github name",
+      "user_name" : "this is user name",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : "author"
+    },
+    "comment" : { },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "Like"
   }, {
-    "author" : {
-      "type" : "type"
+    "summary" : "summary string",
+    "post" : {
+      "visibility" : "PUBLIC",
+      "author" : {
+        "github_name" : "this is github name",
+        "user_name" : "this is user name",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "type" : "author"
+      },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "published" : "2000-01-23T04:56:07.000+00:00",
+      "type" : "post",
+      "title" : "this is a title",
+      "content" : "aaaaabbbbbbcccc"
     },
-    "type" : "Like",
-    "object" : { }
+    "author" : {
+      "github_name" : "this is github name",
+      "user_name" : "this is user name",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : "author"
+    },
+    "comment" : { },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "Like"
   } ]
 };
     if (Object.keys(examples).length > 0) {
@@ -42,9 +80,9 @@ exports.getLikesOfAPostByProvidedAuthorAndPostId = function(aUTHOR_ID,pOST_ID) {
  * Get likes of the post by provided author and post id
  * GET a list of likes from other authors on author_id’s post post_id
  *
- * aUTHOR_ID UUID ID of author to return
- * pOST_ID UUID Pet object that needs to be added to the store
- * cOMMENT_ID UUID Pet object that needs to be added to the store
+ * aUTHOR_ID UUID ID of the post's author
+ * pOST_ID UUID ID of the post
+ * cOMMENT_ID UUID ID of the comment
  * returns CommentLikeArray
  **/
 exports.getLikesOfAPostOfACommentByProvidedAuthorAndPostId = function(aUTHOR_ID,pOST_ID,cOMMENT_ID) {
@@ -54,17 +92,79 @@ exports.getLikesOfAPostOfACommentByProvidedAuthorAndPostId = function(aUTHOR_ID,
   "comment" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "type" : "Likes",
   "likes" : [ {
-    "author" : {
-      "type" : "type"
+    "summary" : "summary string",
+    "post" : {
+      "visibility" : "PUBLIC",
+      "author" : {
+        "github_name" : "this is github name",
+        "user_name" : "this is user name",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "type" : "author"
+      },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "published" : "2000-01-23T04:56:07.000+00:00",
+      "type" : "post",
+      "title" : "this is a title",
+      "content" : "aaaaabbbbbbcccc"
     },
-    "type" : "Like",
-    "object" : { }
+    "author" : {
+      "github_name" : "this is github name",
+      "user_name" : "this is user name",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : "author"
+    },
+    "comment" : {
+      "author" : {
+        "github_name" : "this is github name",
+        "user_name" : "this is user name",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "type" : "author"
+      },
+      "comment" : "this is comment content",
+      "published" : "”2015-03-09T13:07:04+00:00”",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : "comment",
+      "contentType" : "text"
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "Like"
   }, {
-    "author" : {
-      "type" : "type"
+    "summary" : "summary string",
+    "post" : {
+      "visibility" : "PUBLIC",
+      "author" : {
+        "github_name" : "this is github name",
+        "user_name" : "this is user name",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "type" : "author"
+      },
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "published" : "2000-01-23T04:56:07.000+00:00",
+      "type" : "post",
+      "title" : "this is a title",
+      "content" : "aaaaabbbbbbcccc"
     },
-    "type" : "Like",
-    "object" : { }
+    "author" : {
+      "github_name" : "this is github name",
+      "user_name" : "this is user name",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : "author"
+    },
+    "comment" : {
+      "author" : {
+        "github_name" : "this is github name",
+        "user_name" : "this is user name",
+        "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+        "type" : "author"
+      },
+      "comment" : "this is comment content",
+      "published" : "”2015-03-09T13:07:04+00:00”",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : "comment",
+      "contentType" : "text"
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "Like"
   } ]
 };
     if (Object.keys(examples).length > 0) {

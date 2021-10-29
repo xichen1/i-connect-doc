@@ -13,24 +13,18 @@ exports.createAPost = function(body,aUTHOR_ID,pOST_ID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "comments" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "visibility" : "PUBLIC",
   "author" : {
-    "type" : "type"
+    "github_name" : "this is github name",
+    "user_name" : "this is user name",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "author"
   },
-  "description" : "description",
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "published" : "2000-01-23T04:56:07.000+00:00",
-  "type" : "Post",
-  "title" : "title",
-  "contentType" : "contentType",
-  "commentsSrc" : {
-    "comment" : "comment",
-    "published" : "2000-01-23T04:56:07.000+00:00",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "Comment",
-    "contentType" : "contentType"
-  }
+  "type" : "post",
+  "title" : "this is a title",
+  "content" : "aaaaabbbbbbcccc"
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
@@ -52,24 +46,18 @@ exports.createAPostAndGenerateId = function(body,aUTHOR_ID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "comments" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "visibility" : "PUBLIC",
   "author" : {
-    "type" : "type"
+    "github_name" : "this is github name",
+    "user_name" : "this is user name",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "author"
   },
-  "description" : "description",
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "published" : "2000-01-23T04:56:07.000+00:00",
-  "type" : "Post",
-  "title" : "title",
-  "contentType" : "contentType",
-  "commentsSrc" : {
-    "comment" : "comment",
-    "published" : "2000-01-23T04:56:07.000+00:00",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "Comment",
-    "contentType" : "contentType"
-  }
+  "type" : "post",
+  "title" : "this is a title",
+  "content" : "aaaaabbbbbbcccc"
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
@@ -104,24 +92,18 @@ exports.getAuthorRecentPosts = function(aUTHOR_ID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "comments" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "visibility" : "PUBLIC",
   "author" : {
-    "type" : "type"
+    "github_name" : "this is github name",
+    "user_name" : "this is user name",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "author"
   },
-  "description" : "description",
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "published" : "2000-01-23T04:56:07.000+00:00",
-  "type" : "Post",
-  "title" : "title",
-  "contentType" : "contentType",
-  "commentsSrc" : {
-    "comment" : "comment",
-    "published" : "2000-01-23T04:56:07.000+00:00",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "Comment",
-    "contentType" : "contentType"
-  }
+  "type" : "post",
+  "title" : "this is a title",
+  "content" : "aaaaabbbbbbcccc"
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
@@ -143,24 +125,49 @@ exports.getPostByPostIdAndAuthorId = function(aUTHOR_ID,pOST_ID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "comments" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "visibility" : "PUBLIC",
   "author" : {
-    "type" : "type"
+    "github_name" : "this is github name",
+    "user_name" : "this is user name",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "author"
   },
-  "description" : "description",
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "published" : "2000-01-23T04:56:07.000+00:00",
-  "type" : "Post",
-  "title" : "title",
-  "contentType" : "contentType",
-  "commentsSrc" : {
-    "comment" : "comment",
-    "published" : "2000-01-23T04:56:07.000+00:00",
+  "type" : "post",
+  "title" : "this is a title",
+  "content" : "aaaaabbbbbbcccc"
+};
+    if (Object.keys(examples).length > 0) {
+      resolve(examples[Object.keys(examples)[0]]);
+    } else {
+      resolve();
+    }
+  });
+}
+
+
+/**
+ * Get all public posts
+ *
+ * returns Post
+ **/
+exports.postsGET = function() {
+  return new Promise(function(resolve, reject) {
+    var examples = {};
+    examples['application/json'] = {
+  "visibility" : "PUBLIC",
+  "author" : {
+    "github_name" : "this is github name",
+    "user_name" : "this is user name",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "Comment",
-    "contentType" : "contentType"
-  }
+    "type" : "author"
+  },
+  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "published" : "2000-01-23T04:56:07.000+00:00",
+  "type" : "post",
+  "title" : "this is a title",
+  "content" : "aaaaabbbbbbcccc"
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
@@ -175,32 +182,27 @@ exports.getPostByPostIdAndAuthorId = function(aUTHOR_ID,pOST_ID) {
  * Update the post using the post's id and the author's id(not finished)
  * must be authenticated
  *
+ * body Post Pet object that needs to be added to the store (optional)
  * aUTHOR_ID UUID ID of author to return
  * pOST_ID UUID ID of post to return
  * returns Post
  **/
-exports.updatePostByPostIdAndAuthorId = function(aUTHOR_ID,pOST_ID) {
+exports.updatePostByPostIdAndAuthorId = function(body,aUTHOR_ID,pOST_ID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "comments" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "visibility" : "PUBLIC",
   "author" : {
-    "type" : "type"
+    "github_name" : "this is github name",
+    "user_name" : "this is user name",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "author"
   },
-  "description" : "description",
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "published" : "2000-01-23T04:56:07.000+00:00",
-  "type" : "Post",
-  "title" : "title",
-  "contentType" : "contentType",
-  "commentsSrc" : {
-    "comment" : "comment",
-    "published" : "2000-01-23T04:56:07.000+00:00",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "Comment",
-    "contentType" : "contentType"
-  }
+  "type" : "post",
+  "title" : "this is a title",
+  "content" : "aaaaabbbbbbcccc"
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);

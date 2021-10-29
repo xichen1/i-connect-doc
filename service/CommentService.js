@@ -13,11 +13,17 @@ exports.authorAUTHOR_IDPostsPOST_IDCommentsPOST = function(body,aUTHOR_ID,pOST_I
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "comment" : "comment",
-  "published" : "2000-01-23T04:56:07.000+00:00",
+  "author" : {
+    "github_name" : "this is github name",
+    "user_name" : "this is user name",
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "type" : "author"
+  },
+  "comment" : "this is comment content",
+  "published" : "”2015-03-09T13:07:04+00:00”",
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "type" : "Comment",
-  "contentType" : "contentType"
+  "type" : "comment",
+  "contentType" : "text"
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
@@ -31,8 +37,8 @@ exports.authorAUTHOR_IDPostsPOST_IDCommentsPOST = function(body,aUTHOR_ID,pOST_I
 /**
  * Get comments of the post by provided author and post id
  *
- * aUTHOR_ID UUID ID of author to return
- * pOST_ID UUID Pet object that needs to be added to the store
+ * aUTHOR_ID UUID ID of the post's author
+ * pOST_ID UUID ID of the post
  * returns CommentArray
  **/
 exports.createCommentByProvidedUserAndPost = function(aUTHOR_ID,pOST_ID) {
@@ -40,20 +46,32 @@ exports.createCommentByProvidedUserAndPost = function(aUTHOR_ID,pOST_ID) {
     var examples = {};
     examples['application/json'] = {
   "comments" : [ {
-    "comment" : "comment",
-    "published" : "2000-01-23T04:56:07.000+00:00",
+    "author" : {
+      "github_name" : "this is github name",
+      "user_name" : "this is user name",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : "author"
+    },
+    "comment" : "this is comment content",
+    "published" : "”2015-03-09T13:07:04+00:00”",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "Comment",
-    "contentType" : "contentType"
+    "type" : "comment",
+    "contentType" : "text"
   }, {
-    "comment" : "comment",
-    "published" : "2000-01-23T04:56:07.000+00:00",
+    "author" : {
+      "github_name" : "this is github name",
+      "user_name" : "this is user name",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : "author"
+    },
+    "comment" : "this is comment content",
+    "published" : "”2015-03-09T13:07:04+00:00”",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "Comment",
-    "contentType" : "contentType"
+    "type" : "comment",
+    "contentType" : "text"
   } ],
   "id" : "id",
-  "type" : "Comments"
+  "type" : "comments"
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);

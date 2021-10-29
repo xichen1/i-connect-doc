@@ -2,9 +2,9 @@
 
 
 /**
- * Save a post/follow/like to {AUTHOR_ID}'s inbox
+ * Save a post/follow/like
  *
- * body InboxItem Post/follow/like object that needs to be added to the inbox
+ * body FriendPost Comment object that needs to be added to the post (optional)
  * aUTHOR_ID UUID ID of author to return
  * returns Inbox
  **/
@@ -12,11 +12,35 @@ exports.addItemToInboxByAuthorId = function(body,aUTHOR_ID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "author" : {
-    "type" : "type"
-  },
+  "author" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "type" : "inbox",
-  "items" : [ "", "" ]
+  "items" : [ {
+    "visibility" : "FRIENDS",
+    "author" : {
+      "github_name" : "this is github name",
+      "user_name" : "this is user name",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : "author"
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "published" : "2000-01-23T04:56:07.000+00:00",
+    "type" : "post",
+    "title" : "this is a title",
+    "content" : "aaaaabbbbbbcccc"
+  }, {
+    "visibility" : "FRIENDS",
+    "author" : {
+      "github_name" : "this is github name",
+      "user_name" : "this is user name",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : "author"
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "published" : "2000-01-23T04:56:07.000+00:00",
+    "type" : "post",
+    "title" : "this is a title",
+    "content" : "aaaaabbbbbbcccc"
+  } ]
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
@@ -28,32 +52,20 @@ exports.addItemToInboxByAuthorId = function(body,aUTHOR_ID) {
 
 
 /**
- * Delete a post/follow/like to {AUTHOR_ID}'s inbox(not finished)
+ * Delete a post/follow/like to {AUTHOR_ID}'s inbox
  *
  * aUTHOR_ID UUID ID of author to return
- * returns Inbox
+ * no response value expected for this operation
  **/
 exports.deleteItemsInInboxByAuthorId = function(aUTHOR_ID) {
   return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "author" : {
-    "type" : "type"
-  },
-  "type" : "inbox",
-  "items" : [ "", "" ]
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
+    resolve();
   });
 }
 
 
 /**
- * Get a list of posts/likes/follows sent to {AUTHOR_ID}
+ * Get a list of shared posts sent to {AUTHOR_ID}
  *
  * aUTHOR_ID UUID ID of author to return
  * returns Inbox
@@ -62,11 +74,35 @@ exports.getInboxByAuthorId = function(aUTHOR_ID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "author" : {
-    "type" : "type"
-  },
+  "author" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "type" : "inbox",
-  "items" : [ "", "" ]
+  "items" : [ {
+    "visibility" : "FRIENDS",
+    "author" : {
+      "github_name" : "this is github name",
+      "user_name" : "this is user name",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : "author"
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "published" : "2000-01-23T04:56:07.000+00:00",
+    "type" : "post",
+    "title" : "this is a title",
+    "content" : "aaaaabbbbbbcccc"
+  }, {
+    "visibility" : "FRIENDS",
+    "author" : {
+      "github_name" : "this is github name",
+      "user_name" : "this is user name",
+      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+      "type" : "author"
+    },
+    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "published" : "2000-01-23T04:56:07.000+00:00",
+    "type" : "post",
+    "title" : "this is a title",
+    "content" : "aaaaabbbbbbcccc"
+  } ]
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);

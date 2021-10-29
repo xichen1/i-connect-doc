@@ -53,8 +53,18 @@ module.exports.getPostByPostIdAndAuthorId = function getPostByPostIdAndAuthorId 
     });
 };
 
-module.exports.updatePostByPostIdAndAuthorId = function updatePostByPostIdAndAuthorId (req, res, next, aUTHOR_ID, pOST_ID) {
-  Post.updatePostByPostIdAndAuthorId(aUTHOR_ID, pOST_ID)
+module.exports.postsGET = function postsGET (req, res, next) {
+  Post.postsGET()
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
+module.exports.updatePostByPostIdAndAuthorId = function updatePostByPostIdAndAuthorId (req, res, next, body, aUTHOR_ID, pOST_ID) {
+  Post.updatePostByPostIdAndAuthorId(body, aUTHOR_ID, pOST_ID)
     .then(function (response) {
       utils.writeJson(res, response);
     })

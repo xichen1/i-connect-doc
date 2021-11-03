@@ -23,7 +23,7 @@ exports.addItemToInboxByAuthorId = function(body,aUTHOR_ID) {
       "type" : "author"
     },
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "published" : "2000-01-23T04:56:07.000+00:00",
+    "published" : { },
     "type" : "post",
     "title" : "this is a title",
     "content" : "aaaaabbbbbbcccc"
@@ -36,7 +36,7 @@ exports.addItemToInboxByAuthorId = function(body,aUTHOR_ID) {
       "type" : "author"
     },
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "published" : "2000-01-23T04:56:07.000+00:00",
+    "published" : { },
     "type" : "post",
     "title" : "this is a title",
     "content" : "aaaaabbbbbbcccc"
@@ -85,7 +85,7 @@ exports.getInboxByAuthorId = function(aUTHOR_ID) {
       "type" : "author"
     },
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "published" : "2000-01-23T04:56:07.000+00:00",
+    "published" : { },
     "type" : "post",
     "title" : "this is a title",
     "content" : "aaaaabbbbbbcccc"
@@ -98,7 +98,7 @@ exports.getInboxByAuthorId = function(aUTHOR_ID) {
       "type" : "author"
     },
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "published" : "2000-01-23T04:56:07.000+00:00",
+    "published" : { },
     "type" : "post",
     "title" : "this is a title",
     "content" : "aaaaabbbbbbcccc"

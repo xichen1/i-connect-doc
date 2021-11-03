@@ -377,7 +377,7 @@ paths:
         "401":
           description: Invalid credential
       x-swagger-router-controller: Author
-  /author/{AUTHOR_ID}/posts/{POST_ID}/comments:
+  /authors/{AUTHOR_ID}/posts/{POST_ID}/comments/:
     get:
       tags:
       - comment
@@ -810,7 +810,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           type: author
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        published: 2000-01-23T04:56:07.000+00:00
+        published: {}
         type: post
         title: this is a title
         content: aaaaabbbbbbcccc
@@ -888,7 +888,7 @@ components:
           example: text
         published:
           type: string
-          example: ”2015-03-09T13:07:04+00:00”
+          example: 2015-03-09T13:07:04+00:00
         id:
           type: string
           format: uuid
@@ -899,7 +899,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           type: author
         comment: this is comment content
-        published: ”2015-03-09T13:07:04+00:00”
+        published: 2015-03-09T13:07:04+00:00
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         type: comment
         contentType: text
@@ -923,7 +923,7 @@ components:
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             type: author
           comment: this is comment content
-          published: ”2015-03-09T13:07:04+00:00”
+          published: 2015-03-09T13:07:04+00:00
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           type: comment
           contentType: text
@@ -933,7 +933,7 @@ components:
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             type: author
           comment: this is comment content
-          published: ”2015-03-09T13:07:04+00:00”
+          published: 2015-03-09T13:07:04+00:00
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           type: comment
           contentType: text
@@ -968,7 +968,7 @@ components:
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             type: author
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          published: 2000-01-23T04:56:07.000+00:00
+          published: {}
           type: post
           title: this is a title
           content: aaaaabbbbbbcccc
@@ -1008,7 +1008,7 @@ components:
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             type: author
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          published: 2000-01-23T04:56:07.000+00:00
+          published: {}
           type: post
           title: this is a title
           content: aaaaabbbbbbcccc
@@ -1024,7 +1024,7 @@ components:
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             type: author
           comment: this is comment content
-          published: ”2015-03-09T13:07:04+00:00”
+          published: 2015-03-09T13:07:04+00:00
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           type: comment
           contentType: text
@@ -1056,7 +1056,7 @@ components:
               id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               type: author
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            published: 2000-01-23T04:56:07.000+00:00
+            published: {}
             type: post
             title: this is a title
             content: aaaaabbbbbbcccc
@@ -1077,7 +1077,7 @@ components:
               id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               type: author
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            published: 2000-01-23T04:56:07.000+00:00
+            published: {}
             type: post
             title: this is a title
             content: aaaaabbbbbbcccc
@@ -1115,7 +1115,7 @@ components:
               id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               type: author
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            published: 2000-01-23T04:56:07.000+00:00
+            published: {}
             type: post
             title: this is a title
             content: aaaaabbbbbbcccc
@@ -1131,7 +1131,7 @@ components:
               id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               type: author
             comment: this is comment content
-            published: ”2015-03-09T13:07:04+00:00”
+            published: 2015-03-09T13:07:04+00:00
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             type: comment
             contentType: text
@@ -1146,7 +1146,7 @@ components:
               id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               type: author
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            published: 2000-01-23T04:56:07.000+00:00
+            published: {}
             type: post
             title: this is a title
             content: aaaaabbbbbbcccc
@@ -1162,7 +1162,7 @@ components:
               id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               type: author
             comment: this is comment content
-            published: ”2015-03-09T13:07:04+00:00”
+            published: 2015-03-09T13:07:04+00:00
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             type: comment
             contentType: text
@@ -1209,7 +1209,7 @@ components:
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             type: author
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          published: 2000-01-23T04:56:07.000+00:00
+          published: {}
           type: post
           title: this is a title
           content: aaaaabbbbbbcccc
@@ -1220,7 +1220,7 @@ components:
             id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             type: author
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          published: 2000-01-23T04:56:07.000+00:00
+          published: {}
           type: post
           title: this is a title
           content: aaaaabbbbbbcccc
@@ -1262,7 +1262,7 @@ components:
           id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           type: author
         id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        published: 2000-01-23T04:56:07.000+00:00
+        published: {}
         type: post
         title: this is a title
         content: aaaaabbbbbbcccc

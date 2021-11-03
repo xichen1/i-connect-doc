@@ -20,7 +20,7 @@ exports.authorAUTHOR_IDPostsPOST_IDCommentsPOST = function(body,aUTHOR_ID,pOST_I
     "type" : "author"
   },
   "comment" : "this is comment content",
-  "published" : "”2015-03-09T13:07:04+00:00”",
+  "published" : "2015-03-09T13:07:04+00:00",
   "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
   "type" : "comment",
   "contentType" : "text"
@@ -53,7 +53,7 @@ exports.createCommentByProvidedUserAndPost = function(aUTHOR_ID,pOST_ID) {
       "type" : "author"
     },
     "comment" : "this is comment content",
-    "published" : "”2015-03-09T13:07:04+00:00”",
+    "published" : "2015-03-09T13:07:04+00:00",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "comment",
     "contentType" : "text"
@@ -65,7 +65,7 @@ exports.createCommentByProvidedUserAndPost = function(aUTHOR_ID,pOST_ID) {
       "type" : "author"
     },
     "comment" : "this is comment content",
-    "published" : "”2015-03-09T13:07:04+00:00”",
+    "published" : "2015-03-09T13:07:04+00:00",
     "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
     "type" : "comment",
     "contentType" : "text"

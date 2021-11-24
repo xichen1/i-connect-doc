@@ -4,7 +4,7 @@ info:
   description: "This is the documentation of i-connect, a course project of CMPUT\
     \ 404 at University of Alberta.  The document is implemented by swagger ui and\
     \ swagger editor which are under Apache-2.0 License. See detail about swagger\
-    \ and its License below"
+    \ and its License below."
   termsOfService: http://swagger.io/terms/
   contact:
     email: xichen3@ualberta.ca
@@ -33,7 +33,7 @@ tags:
 - name: inbox
   description: inbox related
 paths:
-  /authors/{AUTHOR_ID}/posts/{POST_ID}/:
+  /author/{AUTHOR_ID}/posts/{POST_ID}/:
     get:
       tags:
       - post
@@ -65,18 +65,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Post'
+            image/jpeg:
+              schema:
+                type: string
+                description: a jpeg image
+                format: binary
+            image/png:
+              schema:
+                type: string
+                description: a png image
+                format: binary
         "404":
           description: Cannot find author or post
+      security:
+      - basicAuth: []
       x-swagger-router-controller: Post
     put:
       tags:
       - post
-      summary: Create a post with provided post_id
+      summary: Create a post with provided post object
       operationId: createAPost
       parameters:
       - name: AUTHOR_ID
         in: path
-        description: ID of author to return
+        description: ID of author to use
         required: true
         style: simple
         explode: false
@@ -85,7 +97,7 @@ paths:
           format: uuid
       - name: POST_ID
         in: path
-        description: ID of post to return
+        description: ID of post to create
         required: true
         style: simple
         explode: false
@@ -93,14 +105,14 @@ paths:
           type: string
           format: uuid
       requestBody:
-        description: Pet object that needs to be added to the store
+        description: Post object that needs to be added
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Post'
         required: true
       responses:
-        "200":
+        "201":
           description: Post created
           content:
             application/json:
@@ -110,17 +122,19 @@ paths:
           description: "Bad request, see error message"
         "404":
           description: Author not found
+      security:
+      - basicAuth: []
       x-swagger-router-controller: Post
     post:
       tags:
       - post
-      summary: Update the post using the post's id and the author's id(not finished)
+      summary: Update the post using the post's id and the author's id
       description: must be authenticated
       operationId: updatePostByPostIdAndAuthorId
       parameters:
       - name: AUTHOR_ID
         in: path
-        description: ID of author to return
+        description: ID of author for this post
         required: true
         style: simple
         explode: false
@@ -129,7 +143,7 @@ paths:
           format: uuid
       - name: POST_ID
         in: path
-        description: ID of post to return
+        description: ID of post
         required: true
         style: simple
         explode: false
@@ -155,6 +169,8 @@ paths:
           description: You are not allowed to create this post
         "404":
           description: Cannot find author or post
+      security:
+      - basicAuth: []
       x-swagger-router-controller: Post
     delete:
       tags:
@@ -164,7 +180,7 @@ paths:
       parameters:
       - name: AUTHOR_ID
         in: path
-        description: ID of author to return
+        description: ID of author for the post
         required: true
         style: simple
         explode: false
@@ -173,7 +189,7 @@ paths:
           format: uuid
       - name: POST_ID
         in: path
-        description: ID of post to return
+        description: ID of post
         required: true
         style: simple
         explode: false
@@ -187,12 +203,14 @@ paths:
           description: You are not allowed to delete this post
         "404":
           description: Author/Post not found
+      security:
+      - basicAuth: []
       x-swagger-router-controller: Post
   /author/{AUTHOR_ID}/post/:
     get:
       tags:
       - post
-      summary: Get one author's all posts
+      summary: Get one author's all public posts
       operationId: getAuthorRecentPosts
       parameters:
       - name: AUTHOR_ID
@@ -213,6 +231,8 @@ paths:
                 $ref: '#/components/schemas/Post'
         "404":
           description: Author/Post not found
+      security:
+      - basicAuth: []
       x-swagger-router-controller: Post
     post:
       tags:
@@ -237,7 +257,7 @@ paths:
               $ref: '#/components/schemas/Post'
         required: true
       responses:
-        "200":
+        "201":
           description: Post created
           content:
             application/json:
@@ -247,20 +267,8 @@ paths:
           description: You are not allowed to create this post
         "404":
           description: Author not found
-      x-swagger-router-controller: Post
-  /posts/:
-    get:
-      tags:
-      - post
-      summary: Get all public posts
-      operationId: postsGET
-      responses:
-        "200":
-          description: Posts found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Post'
+      security:
+      - basicAuth: []
       x-swagger-router-controller: Post
   /author/{AUTHOR_ID}/:
     get:
@@ -287,6 +295,8 @@ paths:
                 $ref: '#/components/schemas/Author'
         "404":
           description: Author not found
+      security:
+      - basicAuth: []
       x-swagger-router-controller: Author
     post:
       tags:
@@ -296,7 +306,7 @@ paths:
       parameters:
       - name: AUTHOR_ID
         in: path
-        description: ID of author to return
+        description: ID of author to update
         required: true
         style: simple
         explode: false
@@ -318,6 +328,8 @@ paths:
                 $ref: '#/components/schemas/Author'
         "404":
           description: Author not found
+      security:
+      - basicAuth: []
       x-swagger-router-controller: Author
   /authors/:
     get:
@@ -331,53 +343,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Authors'
+                $ref: '#/components/schemas/AuthorList'
+      security:
+      - basicAuth: []
       x-swagger-router-controller: Author
-  /users/signup/:
-    post:
-      tags:
-      - author
-      summary: Sign up a user
-      operationId: usersSignupPOST
-      requestBody:
-        description: Create a author object
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SignUpAuthor'
-      responses:
-        "200":
-          description: Author created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Author'
-        "400":
-          description: Username already taken
-      x-swagger-router-controller: Author
-  /users/login/:
-    post:
-      tags:
-      - author
-      summary: Login up a user
-      operationId: usersLoginPOST
-      requestBody:
-        description: Update author object
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/LoginUser'
-      responses:
-        "200":
-          description: Author created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Author'
-        "401":
-          description: Invalid credential
-      x-swagger-router-controller: Author
-  /authors/{AUTHOR_ID}/posts/{POST_ID}/comments/:
+  /author/{AUTHOR_ID}/posts/{POST_ID}/comments/:
     get:
       tags:
       - comment
@@ -408,9 +378,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CommentArray'
+                $ref: '#/components/schemas/CommentSrc'
         "404":
           description: Author/Post/Comment not found
+      security:
+      - basicAuth: []
       x-swagger-router-controller: Comment
     post:
       tags:
@@ -452,8 +424,10 @@ paths:
                 $ref: '#/components/schemas/Comment'
         "404":
           description: Author/Post/ not found
+      security:
+      - basicAuth: []
       x-swagger-router-controller: Comment
-  /authors/{AUTHOR_ID}/posts/{POST_ID}/likes/:
+  /author/{AUTHOR_ID}/posts/{POST_ID}/likes/:
     get:
       tags:
       - likes
@@ -485,15 +459,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PostLikeArray'
+                type: array
+                items:
+                  $ref: '#/components/schemas/PostLike'
+                x-content-type: application/json
         "404":
           description: Author/Post not found
+      security:
+      - basicAuth: []
       x-swagger-router-controller: Likes
-  /author/{AUTHOR_ID}/post/{POST_ID}/comments/{COMMENT_ID}/likes/:
+  /author/{AUTHOR_ID}/posts/{POST_ID}/comments/{COMMENT_ID}/likes/:
     get:
       tags:
       - likes
-      summary: Get likes of the post by provided author and post id
+      summary: "Get likes of the post by provided author, post and comment id"
       description: GET a list of likes from other authors on author_id’s post post_id
       operationId: getLikesOfAPostOfACommentByProvidedAuthorAndPostId
       parameters:
@@ -530,15 +509,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CommentLikeArray'
+                type: array
+                items:
+                  $ref: '#/components/schemas/CommentLike'
+                x-content-type: application/json
         "404":
           description: Author/Post/Comment not found
+      security:
+      - basicAuth: []
       x-swagger-router-controller: Likes
   /author/{AUTHOR_ID}/liked/:
     get:
       tags:
       - liked
-      summary: GET list what public things author_id liked
+      summary: GET list what posts/commenets the author_id liked
       operationId: authorAUTHOR_IDLikedGET
       parameters:
       - name: AUTHOR_ID
@@ -557,6 +541,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Liked'
+        "404":
+          description: not found
+      security:
+      - basicAuth: []
       x-swagger-router-controller: Liked
   /author/{AUTHOR_ID}/followers/:
     get:
@@ -576,13 +564,17 @@ paths:
           format: uuid
       responses:
         "200":
-          description: Liked list found
+          description: followers found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Liked'
+                $ref: '#/components/schemas/Followers'
         "400":
           description: See error message
+        "404":
+          description: not found
+      security:
+      - basicAuth: []
       x-swagger-router-controller: Follow
   /author/{AUTHOR_ID}/followers/{FOREIGN_AUTHOR_ID}/:
     get:
@@ -614,10 +606,12 @@ paths:
           description: Authors found
           content:
             application/json:
-              schema:
-                x-content-type: application/json
+              example:
+                result: true
         "404":
-          description: Author not found
+          description: not found
+      security:
+      - basicAuth: []
       x-swagger-router-controller: Follow
     put:
       tags:
@@ -649,9 +643,11 @@ paths:
           content:
             application/json:
               schema:
-                x-content-type: application/json
+                $ref: '#/components/schemas/Follow'
         "404":
-          description: Author not found
+          description: not found
+      security:
+      - basicAuth: []
       x-swagger-router-controller: Follow
     delete:
       tags:
@@ -680,12 +676,10 @@ paths:
       responses:
         "204":
           description: Follower deleted
-          content:
-            application/json:
-              schema:
-                x-content-type: application/json
         "404":
-          description: Author not found
+          description: not found
+      security:
+      - basicAuth: []
       x-swagger-router-controller: Follow
   /author/{AUTHOR_ID}/inbox/:
     get:
@@ -696,7 +690,7 @@ paths:
       parameters:
       - name: AUTHOR_ID
         in: path
-        description: ID of author to return
+        description: ID of author of the inbox
         required: true
         style: simple
         explode: false
@@ -713,7 +707,9 @@ paths:
         "400":
           description: See error message
         "404":
-          description: Author not found
+          description: not found
+      security:
+      - basicAuth: []
       x-swagger-router-controller: Inbox
     post:
       tags:
@@ -723,7 +719,7 @@ paths:
       parameters:
       - name: AUTHOR_ID
         in: path
-        description: ID of author to return
+        description: ID of author of inbox
         required: true
         style: simple
         explode: false
@@ -735,7 +731,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FriendPost'
+              $ref: '#/components/schemas/Post'
       responses:
         "201":
           description: Inbox item created
@@ -746,12 +742,14 @@ paths:
         "400":
           description: invalid input
         "404":
-          description: Author not found
+          description: not found
+      security:
+      - basicAuth: []
       x-swagger-router-controller: Inbox
     delete:
       tags:
       - inbox
-      summary: "Delete a post/follow/like to {AUTHOR_ID}'s inbox"
+      summary: "Delete all post/follow/like in {AUTHOR_ID}'s inbox"
       operationId: deleteItemsInInboxByAuthorId
       parameters:
       - name: AUTHOR_ID
@@ -768,8 +766,8 @@ paths:
           description: Inbox item deleted
         "400":
           description: invalid input
-        "404":
-          description: Author not found
+      security:
+      - basicAuth: []
       x-swagger-router-controller: Inbox
 components:
   schemas:
@@ -786,11 +784,45 @@ components:
         id:
           type: string
           format: uuid
+        source:
+          type: string
+          example: https://i-connect.herokuapp.com/
+        origin:
+          type: string
+          example: https://i-connect.herokuapp.com/
+        description:
+          type: string
+          example: new post
+        contentType:
+          type: string
+          enum:
+          - text/plain
+          - text/markdown
+          - image/png;base64
+          - image/jpeg;base64
+        content:
+          type: string
+          example: post centent
         author:
           $ref: '#/components/schemas/Author'
+        categories:
+          type: array
+          example:
+          - c1
+          - c2
+          items:
+            type: string
+        count:
+          type: number
+          example: 1
+        comments:
+          type: string
+          example: "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd,"
+        commentSrc:
+          $ref: '#/components/schemas/CommentSrc'
         published:
           type: string
-          format: date-time
+          example: 2021-11-23T14:35:54.516186Z
         visibility:
           type: string
           enum:
@@ -798,22 +830,53 @@ components:
           - FRIENDS
           - PRIVATE
           - SERVERONLY
-        content:
-          type: string
-          description: content of the post
-          example: aaaaabbbbbbcccc
+        unlisted:
+          type: boolean
+          example: false
       example:
+        comments: "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd,"
         visibility: PUBLIC
         author:
-          github_name: this is github name
-          user_name: this is user name
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          github: http://github.com/laracroft
+          displayName: userName1
+          host: https://i-connect.herokuapp.com/
+          id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+          profileImage: https://i.imgur.com/k7XVwpB.jpeg
           type: author
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        published: {}
+          url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+        origin: https://i-connect.herokuapp.com/
+        count: 1
+        description: new post
+        source: https://i-connect.herokuapp.com/
+        published: 2021-11-23T14:35:54.516186Z
         type: post
         title: this is a title
-        content: aaaaabbbbbbcccc
+        content: post centent
+        commentSrc:
+          comments:
+          - author: null
+            comment: this is comment content
+            published: 2015-03-09T13:07:04+00:00
+            id: id
+            type: comment
+            contentType: text/markdown
+          - author: null
+            comment: this is comment content
+            published: 2015-03-09T13:07:04+00:00
+            id: id
+            type: comment
+            contentType: text/markdown
+          size: 5
+          post: https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd
+          page: 1
+          id: https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd/comments
+          type: comments
+        unlisted: false
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        categories:
+        - c1
+        - c2
+        contentType: text/plain
     Author:
       type: object
       properties:
@@ -822,55 +885,209 @@ components:
           example: author
         id:
           type: string
-          format: uuid
-        user_name:
+          example: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+        host:
           type: string
-          example: this is user name
-        github_name:
+          example: https://i-connect.herokuapp.com/
+        displayName:
           type: string
-          example: this is github name
+          example: userName1
+        url:
+          type: string
+          example: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+        github:
+          type: string
+          example: http://github.com/laracroft
+        profileImage:
+          type: string
+          example: https://i.imgur.com/k7XVwpB.jpeg
       example:
-        github_name: this is github name
-        user_name: this is user name
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        github: http://github.com/laracroft
+        displayName: userName1
+        host: https://i-connect.herokuapp.com/
+        id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+        profileImage: https://i.imgur.com/k7XVwpB.jpeg
         type: author
+        url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
       xml:
         name: Order
-    Authors:
-      type: array
-      items:
-        $ref: '#/components/schemas/Author'
-    SignUpAuthor:
+    PostLike:
       type: object
       properties:
         type:
           type: string
-          example: author
-        id:
+          example: like
+        author:
+          $ref: '#/components/schemas/Author'
+        summary:
           type: string
-          format: uuid
-        user_name:
+          example: user1 likes your post
+        object:
           type: string
-          example: this is user name
-        github_name:
-          type: string
-          example: this is github name
-        password:
-          type: string
-          example: this is password
-      xml:
-        name: Order
-    LoginUser:
+          example: https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/123e4567-e12b-00d3-a456-426614174004
+      example:
+        summary: user1 likes your post
+        author:
+          github: http://github.com/laracroft
+          displayName: userName1
+          host: https://i-connect.herokuapp.com/
+          id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+          profileImage: https://i.imgur.com/k7XVwpB.jpeg
+          type: author
+          url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+        type: like
+        object: https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/123e4567-e12b-00d3-a456-426614174004
+    CommentLike:
       type: object
       properties:
-        user_name:
+        type:
           type: string
-          example: this is user name
-        password:
+          example: like
+        author:
+          $ref: '#/components/schemas/Author'
+        summary:
           type: string
-          example: this is password
-      xml:
-        name: Order
+          example: user1 likes your comment
+        object:
+          type: string
+          example: https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/123e4567-e12b-00d3-a456-426614174004/comments/bb2f0537-c7b9-44c6-badc-a1ae37262254
+      example:
+        summary: user1 likes your comment
+        author:
+          github: http://github.com/laracroft
+          displayName: userName1
+          host: https://i-connect.herokuapp.com/
+          id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+          profileImage: https://i.imgur.com/k7XVwpB.jpeg
+          type: author
+          url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+        type: like
+        object: https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/123e4567-e12b-00d3-a456-426614174004/comments/bb2f0537-c7b9-44c6-badc-a1ae37262254
+    Liked:
+      type: object
+      properties:
+        type:
+          type: string
+          example: liked
+        items:
+          $ref: '#/components/schemas/PostLike'
+      example:
+        type: liked
+        items:
+          summary: user1 likes your post
+          author:
+            github: http://github.com/laracroft
+            displayName: userName1
+            host: https://i-connect.herokuapp.com/
+            id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+            profileImage: https://i.imgur.com/k7XVwpB.jpeg
+            type: author
+            url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+          type: like
+          object: https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/123e4567-e12b-00d3-a456-426614174004
+    Inbox:
+      type: object
+      properties:
+        type:
+          type: string
+          example: inbox
+        author:
+          type: string
+          format: uuid
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Post'
+      example:
+        author: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        type: inbox
+        items:
+        - comments: "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd,"
+          visibility: PUBLIC
+          author:
+            github: http://github.com/laracroft
+            displayName: userName1
+            host: https://i-connect.herokuapp.com/
+            id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+            profileImage: https://i.imgur.com/k7XVwpB.jpeg
+            type: author
+            url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+          origin: https://i-connect.herokuapp.com/
+          count: 1
+          description: new post
+          source: https://i-connect.herokuapp.com/
+          published: 2021-11-23T14:35:54.516186Z
+          type: post
+          title: this is a title
+          content: post centent
+          commentSrc:
+            comments:
+            - author: null
+              comment: this is comment content
+              published: 2015-03-09T13:07:04+00:00
+              id: id
+              type: comment
+              contentType: text/markdown
+            - author: null
+              comment: this is comment content
+              published: 2015-03-09T13:07:04+00:00
+              id: id
+              type: comment
+              contentType: text/markdown
+            size: 5
+            post: https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd
+            page: 1
+            id: https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd/comments
+            type: comments
+          unlisted: false
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          categories:
+          - c1
+          - c2
+          contentType: text/plain
+        - comments: "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd,"
+          visibility: PUBLIC
+          author:
+            github: http://github.com/laracroft
+            displayName: userName1
+            host: https://i-connect.herokuapp.com/
+            id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+            profileImage: https://i.imgur.com/k7XVwpB.jpeg
+            type: author
+            url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+          origin: https://i-connect.herokuapp.com/
+          count: 1
+          description: new post
+          source: https://i-connect.herokuapp.com/
+          published: 2021-11-23T14:35:54.516186Z
+          type: post
+          title: this is a title
+          content: post centent
+          commentSrc:
+            comments:
+            - author: null
+              comment: this is comment content
+              published: 2015-03-09T13:07:04+00:00
+              id: id
+              type: comment
+              contentType: text/markdown
+            - author: null
+              comment: this is comment content
+              published: 2015-03-09T13:07:04+00:00
+              id: id
+              type: comment
+              contentType: text/markdown
+            size: 5
+            post: https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd
+            page: 1
+            id: https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd/comments
+            type: comments
+          unlisted: false
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          categories:
+          - c1
+          - c2
+          contentType: text/plain
     Comment:
       type: object
       properties:
@@ -885,384 +1102,133 @@ components:
           example: this is comment content
         contentType:
           type: string
-          example: text
+          example: text/markdown
         published:
           type: string
           example: 2015-03-09T13:07:04+00:00
         id:
           type: string
-          format: uuid
+          format: https://i-connect.herokuapp.com/service/author/d44760bb-3a8f-491a-96a7-2325af0cda58/posts/955cbf80-3ee1-4bdf-96f5-6284de02cba3/comments/d7715e97-9f6c-4292-ba4f-0b489ee1ea5d
       example:
-        author:
-          github_name: this is github name
-          user_name: this is user name
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          type: author
+        author: null
         comment: this is comment content
         published: 2015-03-09T13:07:04+00:00
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        id: id
         type: comment
-        contentType: text
-    CommentArray:
+        contentType: text/markdown
+    CommentSrc:
       type: object
       properties:
         type:
           type: string
           example: comments
+        page:
+          type: number
+          example: 1
+        size:
+          type: number
+          example: 5
+        post:
+          type: string
+          example: https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd
         id:
           type: string
+          example: https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd/comments
         comments:
           type: array
           items:
             $ref: '#/components/schemas/Comment'
       example:
         comments:
-        - author:
-            github_name: this is github name
-            user_name: this is user name
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            type: author
+        - author: null
           comment: this is comment content
           published: 2015-03-09T13:07:04+00:00
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: id
           type: comment
-          contentType: text
-        - author:
-            github_name: this is github name
-            user_name: this is user name
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            type: author
+          contentType: text/markdown
+        - author: null
           comment: this is comment content
           published: 2015-03-09T13:07:04+00:00
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          id: id
           type: comment
-          contentType: text
-        id: id
+          contentType: text/markdown
+        size: 5
+        post: https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd
+        page: 1
+        id: https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd/comments
         type: comments
-    PostLike:
+    Followers:
       type: object
       properties:
         type:
           type: string
-          example: Like
-        author:
-          $ref: '#/components/schemas/Author'
-        post:
-          $ref: '#/components/schemas/Post'
-        comment:
-          type: object
-          nullable: true
-        summary:
-          type: string
-          example: summary string
-        id:
-          type: string
-          format: uuid
+          example: followers
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Author'
       example:
-        summary: summary string
-        post:
-          visibility: PUBLIC
-          author:
-            github_name: this is github name
-            user_name: this is user name
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            type: author
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          published: {}
-          type: post
-          title: this is a title
-          content: aaaaabbbbbbcccc
-        author:
-          github_name: this is github name
-          user_name: this is user name
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        type: followers
+        items:
+        - github: http://github.com/laracroft
+          displayName: userName1
+          host: https://i-connect.herokuapp.com/
+          id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+          profileImage: https://i.imgur.com/k7XVwpB.jpeg
           type: author
-        comment: {}
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        type: Like
-    CommentLike:
-      type: object
-      properties:
-        type:
-          type: string
-          example: Like
-        author:
-          $ref: '#/components/schemas/Author'
-        post:
-          $ref: '#/components/schemas/Post'
-        comment:
-          $ref: '#/components/schemas/Comment'
-        summary:
-          type: string
-          example: summary string
-        id:
-          type: string
-          format: uuid
-      example:
-        summary: summary string
-        post:
-          visibility: PUBLIC
-          author:
-            github_name: this is github name
-            user_name: this is user name
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            type: author
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          published: {}
-          type: post
-          title: this is a title
-          content: aaaaabbbbbbcccc
-        author:
-          github_name: this is github name
-          user_name: this is user name
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+        - github: http://github.com/laracroft
+          displayName: userName1
+          host: https://i-connect.herokuapp.com/
+          id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+          profileImage: https://i.imgur.com/k7XVwpB.jpeg
           type: author
-        comment:
-          author:
-            github_name: this is github name
-            user_name: this is user name
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            type: author
-          comment: this is comment content
-          published: 2015-03-09T13:07:04+00:00
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          type: comment
-          contentType: text
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        type: Like
-    PostLikeArray:
+          url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+    Follow:
       type: object
       properties:
-        type:
-          type: string
-          example: Likes
-        post:
-          type: string
-          format: uuid
-        likes:
-          type: array
-          items:
-            $ref: '#/components/schemas/PostLike'
-      example:
-        post: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        type: Likes
-        likes:
-        - summary: summary string
-          post:
-            visibility: PUBLIC
-            author:
-              github_name: this is github name
-              user_name: this is user name
-              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              type: author
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            published: {}
-            type: post
-            title: this is a title
-            content: aaaaabbbbbbcccc
-          author:
-            github_name: this is github name
-            user_name: this is user name
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            type: author
-          comment: {}
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          type: Like
-        - summary: summary string
-          post:
-            visibility: PUBLIC
-            author:
-              github_name: this is github name
-              user_name: this is user name
-              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              type: author
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            published: {}
-            type: post
-            title: this is a title
-            content: aaaaabbbbbbcccc
-          author:
-            github_name: this is github name
-            user_name: this is user name
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            type: author
-          comment: {}
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          type: Like
-    CommentLikeArray:
-      type: object
-      properties:
-        type:
-          type: string
-          example: Likes
-        comment:
-          type: string
-          format: uuid
-        likes:
-          type: array
-          items:
-            $ref: '#/components/schemas/CommentLike'
-      example:
-        comment: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        type: Likes
-        likes:
-        - summary: summary string
-          post:
-            visibility: PUBLIC
-            author:
-              github_name: this is github name
-              user_name: this is user name
-              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              type: author
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            published: {}
-            type: post
-            title: this is a title
-            content: aaaaabbbbbbcccc
-          author:
-            github_name: this is github name
-            user_name: this is user name
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            type: author
-          comment:
-            author:
-              github_name: this is github name
-              user_name: this is user name
-              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              type: author
-            comment: this is comment content
-            published: 2015-03-09T13:07:04+00:00
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            type: comment
-            contentType: text
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          type: Like
-        - summary: summary string
-          post:
-            visibility: PUBLIC
-            author:
-              github_name: this is github name
-              user_name: this is user name
-              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              type: author
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            published: {}
-            type: post
-            title: this is a title
-            content: aaaaabbbbbbcccc
-          author:
-            github_name: this is github name
-            user_name: this is user name
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            type: author
-          comment:
-            author:
-              github_name: this is github name
-              user_name: this is user name
-              id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              type: author
-            comment: this is comment content
-            published: 2015-03-09T13:07:04+00:00
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            type: comment
-            contentType: text
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          type: Like
-    Liked:
-      type: object
-      properties:
-        type:
-          type: string
-          example: liked
-        items:
-          type: array
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/CommentLike'
-            - $ref: '#/components/schemas/PostLike'
-      example:
-        type: liked
-        items:
-        - ""
-        - ""
-    Inbox:
-      type: object
-      properties:
-        type:
-          type: string
-          example: inbox
-        author:
-          type: string
-          format: uuid
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/FriendPost'
-      example:
-        author: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        type: inbox
-        items:
-        - visibility: FRIENDS
-          author:
-            github_name: this is github name
-            user_name: this is user name
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            type: author
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          published: {}
-          type: post
-          title: this is a title
-          content: aaaaabbbbbbcccc
-        - visibility: FRIENDS
-          author:
-            github_name: this is github name
-            user_name: this is user name
-            id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            type: author
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          published: {}
-          type: post
-          title: this is a title
-          content: aaaaabbbbbbcccc
-    FriendPost:
-      type: object
-      properties:
-        type:
-          type: string
-          example: post
-        title:
-          type: string
-          description: title of a post
-          example: this is a title
-        id:
-          type: string
-          format: uuid
-        author:
+        Follower:
           $ref: '#/components/schemas/Author'
-        published:
-          type: string
-          format: date-time
-        visibility:
-          type: string
-          example: FRIENDS
-          enum:
-          - PUBLIC
-          - FRIENDS
-          - PRIVATE
-          - SERVERONLY
-        content:
-          type: string
-          description: content of the post
-          example: aaaaabbbbbbcccc
+        Following:
+          $ref: '#/components/schemas/Author'
       example:
-        visibility: FRIENDS
-        author:
-          github_name: this is github name
-          user_name: this is user name
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        Following: null
+        Follower:
+          github: http://github.com/laracroft
+          displayName: userName1
+          host: https://i-connect.herokuapp.com/
+          id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+          profileImage: https://i.imgur.com/k7XVwpB.jpeg
           type: author
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        published: {}
-        type: post
-        title: this is a title
-        content: aaaaabbbbbbcccc
+          url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+    AuthorList:
+      type: object
+      properties:
+        type:
+          type: string
+          example: authors
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Author'
+      example:
+        type: authors
+        items:
+        - github: http://github.com/laracroft
+          displayName: userName1
+          host: https://i-connect.herokuapp.com/
+          id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+          profileImage: https://i.imgur.com/k7XVwpB.jpeg
+          type: author
+          url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+        - github: http://github.com/laracroft
+          displayName: userName1
+          host: https://i-connect.herokuapp.com/
+          id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+          profileImage: https://i.imgur.com/k7XVwpB.jpeg
+          type: author
+          url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic

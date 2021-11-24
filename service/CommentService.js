@@ -13,17 +13,11 @@ exports.authorAUTHOR_IDPostsPOST_IDCommentsPOST = function(body,aUTHOR_ID,pOST_I
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "author" : {
-    "github_name" : "this is github name",
-    "user_name" : "this is user name",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-    "type" : "author"
-  },
   "comment" : "this is comment content",
   "published" : "2015-03-09T13:07:04+00:00",
-  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+  "id" : "id",
   "type" : "comment",
-  "contentType" : "text"
+  "contentType" : "text/markdown"
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
@@ -39,38 +33,29 @@ exports.authorAUTHOR_IDPostsPOST_IDCommentsPOST = function(body,aUTHOR_ID,pOST_I
  *
  * aUTHOR_ID UUID ID of the post's author
  * pOST_ID UUID ID of the post
- * returns CommentArray
+ * returns CommentSrc
  **/
 exports.createCommentByProvidedUserAndPost = function(aUTHOR_ID,pOST_ID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
   "comments" : [ {
-    "author" : {
-      "github_name" : "this is github name",
-      "user_name" : "this is user name",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : "author"
-    },
     "comment" : "this is comment content",
     "published" : "2015-03-09T13:07:04+00:00",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "id" : "id",
     "type" : "comment",
-    "contentType" : "text"
+    "contentType" : "text/markdown"
   }, {
-    "author" : {
-      "github_name" : "this is github name",
-      "user_name" : "this is user name",
-      "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-      "type" : "author"
-    },
     "comment" : "this is comment content",
     "published" : "2015-03-09T13:07:04+00:00",
-    "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
+    "id" : "id",
     "type" : "comment",
-    "contentType" : "text"
+    "contentType" : "text/markdown"
   } ],
-  "id" : "id",
+  "size" : 5,
+  "post" : "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd",
+  "page" : 1,
+  "id" : "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd/comments",
   "type" : "comments"
 };
     if (Object.keys(examples).length > 0) {

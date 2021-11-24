@@ -4,22 +4,31 @@
 /**
  * Get all authors
  *
- * returns Authors
+ * returns AuthorList
  **/
 exports.authorsGET = function() {
   return new Promise(function(resolve, reject) {
     var examples = {};
-    examples['application/json'] = [ {
-  "github_name" : "this is github name",
-  "user_name" : "this is user name",
-  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "type" : "author"
-}, {
-  "github_name" : "this is github name",
-  "user_name" : "this is user name",
-  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "type" : "author"
-} ];
+    examples['application/json'] = {
+  "type" : "authors",
+  "items" : [ {
+    "github" : "http://github.com/laracroft",
+    "displayName" : "userName1",
+    "host" : "https://i-connect.herokuapp.com/",
+    "id" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a",
+    "profileImage" : "https://i.imgur.com/k7XVwpB.jpeg",
+    "type" : "author",
+    "url" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a"
+  }, {
+    "github" : "http://github.com/laracroft",
+    "displayName" : "userName1",
+    "host" : "https://i-connect.herokuapp.com/",
+    "id" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a",
+    "profileImage" : "https://i.imgur.com/k7XVwpB.jpeg",
+    "type" : "author",
+    "url" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a"
+  } ]
+};
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
@@ -39,10 +48,13 @@ exports.getAuthorByAutherId = function(aUTHOR_ID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "github_name" : "this is github name",
-  "user_name" : "this is user name",
-  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "type" : "author"
+  "github" : "http://github.com/laracroft",
+  "displayName" : "userName1",
+  "host" : "https://i-connect.herokuapp.com/",
+  "id" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a",
+  "profileImage" : "https://i.imgur.com/k7XVwpB.jpeg",
+  "type" : "author",
+  "url" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a"
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
@@ -57,65 +69,20 @@ exports.getAuthorByAutherId = function(aUTHOR_ID) {
  * Update a author object by provided author_id
  *
  * body Author Update author object (optional)
- * aUTHOR_ID UUID ID of author to return
+ * aUTHOR_ID UUID ID of author to update
  * returns Author
  **/
 exports.updateAuthorByAutherId = function(body,aUTHOR_ID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "github_name" : "this is github name",
-  "user_name" : "this is user name",
-  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "type" : "author"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
-}
-
-
-/**
- * Login up a user
- *
- * body LoginUser Update author object (optional)
- * returns Author
- **/
-exports.usersLoginPOST = function(body) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "github_name" : "this is github name",
-  "user_name" : "this is user name",
-  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "type" : "author"
-};
-    if (Object.keys(examples).length > 0) {
-      resolve(examples[Object.keys(examples)[0]]);
-    } else {
-      resolve();
-    }
-  });
-}
-
-
-/**
- * Sign up a user
- *
- * body SignUpAuthor Create a author object (optional)
- * returns Author
- **/
-exports.usersSignupPOST = function(body) {
-  return new Promise(function(resolve, reject) {
-    var examples = {};
-    examples['application/json'] = {
-  "github_name" : "this is github name",
-  "user_name" : "this is user name",
-  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "type" : "author"
+  "github" : "http://github.com/laracroft",
+  "displayName" : "userName1",
+  "host" : "https://i-connect.herokuapp.com/",
+  "id" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a",
+  "profileImage" : "https://i.imgur.com/k7XVwpB.jpeg",
+  "type" : "author",
+  "url" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a"
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);

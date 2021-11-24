@@ -32,23 +32,3 @@ module.exports.updateAuthorByAutherId = function updateAuthorByAutherId (req, re
       utils.writeJson(res, response);
     });
 };
-
-module.exports.usersLoginPOST = function usersLoginPOST (req, res, next, body) {
-  Author.usersLoginPOST(body)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
-
-module.exports.usersSignupPOST = function usersSignupPOST (req, res, next, body) {
-  Author.usersSignupPOST(body)
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};

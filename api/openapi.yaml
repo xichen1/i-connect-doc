@@ -206,7 +206,7 @@ paths:
       security:
       - basicAuth: []
       x-swagger-router-controller: Post
-  /author/{AUTHOR_ID}/post/:
+  /author/{AUTHOR_ID}/posts/:
     get:
       tags:
       - post
@@ -783,7 +783,7 @@ components:
           example: this is a title
         id:
           type: string
-          format: uuid
+          example: https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd
         source:
           type: string
           example: https://i-connect.herokuapp.com/
@@ -814,10 +814,9 @@ components:
             type: string
         count:
           type: number
-          example: 1
         comments:
           type: string
-          example: "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd,"
+          example: https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd
         commentSrc:
           $ref: '#/components/schemas/CommentSrc'
         published:
@@ -834,8 +833,14 @@ components:
           type: boolean
           example: false
       example:
-        comments: "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd,"
-        visibility: PUBLIC
+        type: post
+        title: this is a title
+        id: https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd
+        source: https://i-connect.herokuapp.com/
+        origin: https://i-connect.herokuapp.com/
+        description: new post
+        contentType: text/plain
+        content: post centent
         author:
           github: http://github.com/laracroft
           displayName: userName1
@@ -844,23 +849,34 @@ components:
           profileImage: https://i.imgur.com/k7XVwpB.jpeg
           type: author
           url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
-        origin: https://i-connect.herokuapp.com/
-        count: 1
-        description: new post
-        source: https://i-connect.herokuapp.com/
-        published: 2021-11-23T14:35:54.516186Z
-        type: post
-        title: this is a title
-        content: post centent
+        categories:
+        - c1
+        - c2
+        count: 2
+        comments: https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd
         commentSrc:
           comments:
-          - author: null
+          - author:
+              github: http://github.com/laracroft
+              displayName: userName1
+              host: https://i-connect.herokuapp.com/
+              id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+              profileImage: https://i.imgur.com/k7XVwpB.jpeg
+              type: author
+              url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
             comment: this is comment content
             published: 2015-03-09T13:07:04+00:00
             id: id
             type: comment
             contentType: text/markdown
-          - author: null
+          - author:
+              github: http://github.com/laracroft
+              displayName: userName1
+              host: https://i-connect.herokuapp.com/
+              id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+              profileImage: https://i.imgur.com/k7XVwpB.jpeg
+              type: author
+              url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
             comment: this is comment content
             published: 2015-03-09T13:07:04+00:00
             id: id
@@ -871,12 +887,9 @@ components:
           page: 1
           id: https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd/comments
           type: comments
+        published: 2021-11-23T14:35:54.516186Z
+        visibility: PUBLIC
         unlisted: false
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        categories:
-        - c1
-        - c2
-        contentType: text/plain
     Author:
       type: object
       properties:
@@ -902,13 +915,13 @@ components:
           type: string
           example: https://i.imgur.com/k7XVwpB.jpeg
       example:
-        github: http://github.com/laracroft
-        displayName: userName1
-        host: https://i-connect.herokuapp.com/
-        id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
-        profileImage: https://i.imgur.com/k7XVwpB.jpeg
         type: author
+        id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+        host: https://i-connect.herokuapp.com/
+        displayName: userName1
         url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+        github: http://github.com/laracroft
+        profileImage: https://i.imgur.com/k7XVwpB.jpeg
       xml:
         name: Order
     PostLike:
@@ -1013,7 +1026,7 @@ components:
             type: author
             url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
           origin: https://i-connect.herokuapp.com/
-          count: 1
+          count: 2
           description: new post
           source: https://i-connect.herokuapp.com/
           published: 2021-11-23T14:35:54.516186Z
@@ -1022,13 +1035,27 @@ components:
           content: post centent
           commentSrc:
             comments:
-            - author: null
+            - author:
+                github: http://github.com/laracroft
+                displayName: userName1
+                host: https://i-connect.herokuapp.com/
+                id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+                profileImage: https://i.imgur.com/k7XVwpB.jpeg
+                type: author
+                url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
               comment: this is comment content
               published: 2015-03-09T13:07:04+00:00
               id: id
               type: comment
               contentType: text/markdown
-            - author: null
+            - author:
+                github: http://github.com/laracroft
+                displayName: userName1
+                host: https://i-connect.herokuapp.com/
+                id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+                profileImage: https://i.imgur.com/k7XVwpB.jpeg
+                type: author
+                url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
               comment: this is comment content
               published: 2015-03-09T13:07:04+00:00
               id: id
@@ -1056,7 +1083,7 @@ components:
             type: author
             url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
           origin: https://i-connect.herokuapp.com/
-          count: 1
+          count: 2
           description: new post
           source: https://i-connect.herokuapp.com/
           published: 2021-11-23T14:35:54.516186Z
@@ -1065,13 +1092,27 @@ components:
           content: post centent
           commentSrc:
             comments:
-            - author: null
+            - author:
+                github: http://github.com/laracroft
+                displayName: userName1
+                host: https://i-connect.herokuapp.com/
+                id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+                profileImage: https://i.imgur.com/k7XVwpB.jpeg
+                type: author
+                url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
               comment: this is comment content
               published: 2015-03-09T13:07:04+00:00
               id: id
               type: comment
               contentType: text/markdown
-            - author: null
+            - author:
+                github: http://github.com/laracroft
+                displayName: userName1
+                host: https://i-connect.herokuapp.com/
+                id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+                profileImage: https://i.imgur.com/k7XVwpB.jpeg
+                type: author
+                url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
               comment: this is comment content
               published: 2015-03-09T13:07:04+00:00
               id: id
@@ -1110,7 +1151,14 @@ components:
           type: string
           format: https://i-connect.herokuapp.com/service/author/d44760bb-3a8f-491a-96a7-2325af0cda58/posts/955cbf80-3ee1-4bdf-96f5-6284de02cba3/comments/d7715e97-9f6c-4292-ba4f-0b489ee1ea5d
       example:
-        author: null
+        author:
+          github: http://github.com/laracroft
+          displayName: userName1
+          host: https://i-connect.herokuapp.com/
+          id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+          profileImage: https://i.imgur.com/k7XVwpB.jpeg
+          type: author
+          url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
         comment: this is comment content
         published: 2015-03-09T13:07:04+00:00
         id: id
@@ -1140,13 +1188,27 @@ components:
             $ref: '#/components/schemas/Comment'
       example:
         comments:
-        - author: null
+        - author:
+            github: http://github.com/laracroft
+            displayName: userName1
+            host: https://i-connect.herokuapp.com/
+            id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+            profileImage: https://i.imgur.com/k7XVwpB.jpeg
+            type: author
+            url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
           comment: this is comment content
           published: 2015-03-09T13:07:04+00:00
           id: id
           type: comment
           contentType: text/markdown
-        - author: null
+        - author:
+            github: http://github.com/laracroft
+            displayName: userName1
+            host: https://i-connect.herokuapp.com/
+            id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+            profileImage: https://i.imgur.com/k7XVwpB.jpeg
+            type: author
+            url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
           comment: this is comment content
           published: 2015-03-09T13:07:04+00:00
           id: id
@@ -1192,15 +1254,22 @@ components:
         Following:
           $ref: '#/components/schemas/Author'
       example:
-        Following: null
-        Follower:
-          github: http://github.com/laracroft
-          displayName: userName1
+        Following:
+          github: http://github.com/laracroftfollowing
+          displayName: following
           host: https://i-connect.herokuapp.com/
           id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
           profileImage: https://i.imgur.com/k7XVwpB.jpeg
           type: author
           url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a
+        Follower:
+          github: http://github.com/laracroft
+          displayName: follower
+          host: https://i-connect.herokuapp.com/
+          id: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6b
+          profileImage: https://i.imgur.com/k7XVwpB.jpeg
+          type: author
+          url: https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6b
     AuthorList:
       type: object
       properties:

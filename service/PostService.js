@@ -13,8 +13,14 @@ exports.createAPost = function(body,aUTHOR_ID,pOST_ID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "comments" : "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd,",
-  "visibility" : "PUBLIC",
+  "type" : "post",
+  "title" : "this is a title",
+  "id" : "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd",
+  "source" : "https://i-connect.herokuapp.com/",
+  "origin" : "https://i-connect.herokuapp.com/",
+  "description" : "new post",
+  "contentType" : "text/plain",
+  "content" : "post centent",
   "author" : {
     "github" : "http://github.com/laracroft",
     "displayName" : "userName1",
@@ -24,22 +30,35 @@ exports.createAPost = function(body,aUTHOR_ID,pOST_ID) {
     "type" : "author",
     "url" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a"
   },
-  "origin" : "https://i-connect.herokuapp.com/",
-  "count" : 1,
-  "description" : "new post",
-  "source" : "https://i-connect.herokuapp.com/",
-  "published" : "2021-11-23T14:35:54.516186Z",
-  "type" : "post",
-  "title" : "this is a title",
-  "content" : "post centent",
+  "categories" : [ "c1", "c2" ],
+  "count" : 2,
+  "comments" : "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd",
   "commentSrc" : {
     "comments" : [ {
+      "author" : {
+        "github" : "http://github.com/laracroft",
+        "displayName" : "userName1",
+        "host" : "https://i-connect.herokuapp.com/",
+        "id" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a",
+        "profileImage" : "https://i.imgur.com/k7XVwpB.jpeg",
+        "type" : "author",
+        "url" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a"
+      },
       "comment" : "this is comment content",
       "published" : "2015-03-09T13:07:04+00:00",
       "id" : "id",
       "type" : "comment",
       "contentType" : "text/markdown"
     }, {
+      "author" : {
+        "github" : "http://github.com/laracroft",
+        "displayName" : "userName1",
+        "host" : "https://i-connect.herokuapp.com/",
+        "id" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a",
+        "profileImage" : "https://i.imgur.com/k7XVwpB.jpeg",
+        "type" : "author",
+        "url" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a"
+      },
       "comment" : "this is comment content",
       "published" : "2015-03-09T13:07:04+00:00",
       "id" : "id",
@@ -52,10 +71,9 @@ exports.createAPost = function(body,aUTHOR_ID,pOST_ID) {
     "id" : "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd/comments",
     "type" : "comments"
   },
-  "unlisted" : false,
-  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "categories" : [ "c1", "c2" ],
-  "contentType" : "text/plain"
+  "published" : "2021-11-23T14:35:54.516186Z",
+  "visibility" : "PUBLIC",
+  "unlisted" : false
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
@@ -77,8 +95,14 @@ exports.createAPostAndGenerateId = function(body,aUTHOR_ID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "comments" : "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd,",
-  "visibility" : "PUBLIC",
+  "type" : "post",
+  "title" : "this is a title",
+  "id" : "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd",
+  "source" : "https://i-connect.herokuapp.com/",
+  "origin" : "https://i-connect.herokuapp.com/",
+  "description" : "new post",
+  "contentType" : "text/plain",
+  "content" : "post centent",
   "author" : {
     "github" : "http://github.com/laracroft",
     "displayName" : "userName1",
@@ -88,22 +112,35 @@ exports.createAPostAndGenerateId = function(body,aUTHOR_ID) {
     "type" : "author",
     "url" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a"
   },
-  "origin" : "https://i-connect.herokuapp.com/",
-  "count" : 1,
-  "description" : "new post",
-  "source" : "https://i-connect.herokuapp.com/",
-  "published" : "2021-11-23T14:35:54.516186Z",
-  "type" : "post",
-  "title" : "this is a title",
-  "content" : "post centent",
+  "categories" : [ "c1", "c2" ],
+  "count" : 2,
+  "comments" : "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd",
   "commentSrc" : {
     "comments" : [ {
+      "author" : {
+        "github" : "http://github.com/laracroft",
+        "displayName" : "userName1",
+        "host" : "https://i-connect.herokuapp.com/",
+        "id" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a",
+        "profileImage" : "https://i.imgur.com/k7XVwpB.jpeg",
+        "type" : "author",
+        "url" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a"
+      },
       "comment" : "this is comment content",
       "published" : "2015-03-09T13:07:04+00:00",
       "id" : "id",
       "type" : "comment",
       "contentType" : "text/markdown"
     }, {
+      "author" : {
+        "github" : "http://github.com/laracroft",
+        "displayName" : "userName1",
+        "host" : "https://i-connect.herokuapp.com/",
+        "id" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a",
+        "profileImage" : "https://i.imgur.com/k7XVwpB.jpeg",
+        "type" : "author",
+        "url" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a"
+      },
       "comment" : "this is comment content",
       "published" : "2015-03-09T13:07:04+00:00",
       "id" : "id",
@@ -116,10 +153,9 @@ exports.createAPostAndGenerateId = function(body,aUTHOR_ID) {
     "id" : "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd/comments",
     "type" : "comments"
   },
-  "unlisted" : false,
-  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "categories" : [ "c1", "c2" ],
-  "contentType" : "text/plain"
+  "published" : "2021-11-23T14:35:54.516186Z",
+  "visibility" : "PUBLIC",
+  "unlisted" : false
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
@@ -154,8 +190,14 @@ exports.getAuthorRecentPosts = function(aUTHOR_ID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "comments" : "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd,",
-  "visibility" : "PUBLIC",
+  "type" : "post",
+  "title" : "this is a title",
+  "id" : "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd",
+  "source" : "https://i-connect.herokuapp.com/",
+  "origin" : "https://i-connect.herokuapp.com/",
+  "description" : "new post",
+  "contentType" : "text/plain",
+  "content" : "post centent",
   "author" : {
     "github" : "http://github.com/laracroft",
     "displayName" : "userName1",
@@ -165,22 +207,35 @@ exports.getAuthorRecentPosts = function(aUTHOR_ID) {
     "type" : "author",
     "url" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a"
   },
-  "origin" : "https://i-connect.herokuapp.com/",
-  "count" : 1,
-  "description" : "new post",
-  "source" : "https://i-connect.herokuapp.com/",
-  "published" : "2021-11-23T14:35:54.516186Z",
-  "type" : "post",
-  "title" : "this is a title",
-  "content" : "post centent",
+  "categories" : [ "c1", "c2" ],
+  "count" : 2,
+  "comments" : "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd",
   "commentSrc" : {
     "comments" : [ {
+      "author" : {
+        "github" : "http://github.com/laracroft",
+        "displayName" : "userName1",
+        "host" : "https://i-connect.herokuapp.com/",
+        "id" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a",
+        "profileImage" : "https://i.imgur.com/k7XVwpB.jpeg",
+        "type" : "author",
+        "url" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a"
+      },
       "comment" : "this is comment content",
       "published" : "2015-03-09T13:07:04+00:00",
       "id" : "id",
       "type" : "comment",
       "contentType" : "text/markdown"
     }, {
+      "author" : {
+        "github" : "http://github.com/laracroft",
+        "displayName" : "userName1",
+        "host" : "https://i-connect.herokuapp.com/",
+        "id" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a",
+        "profileImage" : "https://i.imgur.com/k7XVwpB.jpeg",
+        "type" : "author",
+        "url" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a"
+      },
       "comment" : "this is comment content",
       "published" : "2015-03-09T13:07:04+00:00",
       "id" : "id",
@@ -193,10 +248,9 @@ exports.getAuthorRecentPosts = function(aUTHOR_ID) {
     "id" : "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd/comments",
     "type" : "comments"
   },
-  "unlisted" : false,
-  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "categories" : [ "c1", "c2" ],
-  "contentType" : "text/plain"
+  "published" : "2021-11-23T14:35:54.516186Z",
+  "visibility" : "PUBLIC",
+  "unlisted" : false
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
@@ -218,8 +272,14 @@ exports.getPostByPostIdAndAuthorId = function(aUTHOR_ID,pOST_ID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "comments" : "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd,",
-  "visibility" : "PUBLIC",
+  "type" : "post",
+  "title" : "this is a title",
+  "id" : "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd",
+  "source" : "https://i-connect.herokuapp.com/",
+  "origin" : "https://i-connect.herokuapp.com/",
+  "description" : "new post",
+  "contentType" : "text/plain",
+  "content" : "post centent",
   "author" : {
     "github" : "http://github.com/laracroft",
     "displayName" : "userName1",
@@ -229,22 +289,35 @@ exports.getPostByPostIdAndAuthorId = function(aUTHOR_ID,pOST_ID) {
     "type" : "author",
     "url" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a"
   },
-  "origin" : "https://i-connect.herokuapp.com/",
-  "count" : 1,
-  "description" : "new post",
-  "source" : "https://i-connect.herokuapp.com/",
-  "published" : "2021-11-23T14:35:54.516186Z",
-  "type" : "post",
-  "title" : "this is a title",
-  "content" : "post centent",
+  "categories" : [ "c1", "c2" ],
+  "count" : 2,
+  "comments" : "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd",
   "commentSrc" : {
     "comments" : [ {
+      "author" : {
+        "github" : "http://github.com/laracroft",
+        "displayName" : "userName1",
+        "host" : "https://i-connect.herokuapp.com/",
+        "id" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a",
+        "profileImage" : "https://i.imgur.com/k7XVwpB.jpeg",
+        "type" : "author",
+        "url" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a"
+      },
       "comment" : "this is comment content",
       "published" : "2015-03-09T13:07:04+00:00",
       "id" : "id",
       "type" : "comment",
       "contentType" : "text/markdown"
     }, {
+      "author" : {
+        "github" : "http://github.com/laracroft",
+        "displayName" : "userName1",
+        "host" : "https://i-connect.herokuapp.com/",
+        "id" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a",
+        "profileImage" : "https://i.imgur.com/k7XVwpB.jpeg",
+        "type" : "author",
+        "url" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a"
+      },
       "comment" : "this is comment content",
       "published" : "2015-03-09T13:07:04+00:00",
       "id" : "id",
@@ -257,10 +330,9 @@ exports.getPostByPostIdAndAuthorId = function(aUTHOR_ID,pOST_ID) {
     "id" : "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd/comments",
     "type" : "comments"
   },
-  "unlisted" : false,
-  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "categories" : [ "c1", "c2" ],
-  "contentType" : "text/plain"
+  "published" : "2021-11-23T14:35:54.516186Z",
+  "visibility" : "PUBLIC",
+  "unlisted" : false
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
@@ -284,8 +356,14 @@ exports.updatePostByPostIdAndAuthorId = function(body,aUTHOR_ID,pOST_ID) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
-  "comments" : "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd,",
-  "visibility" : "PUBLIC",
+  "type" : "post",
+  "title" : "this is a title",
+  "id" : "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd",
+  "source" : "https://i-connect.herokuapp.com/",
+  "origin" : "https://i-connect.herokuapp.com/",
+  "description" : "new post",
+  "contentType" : "text/plain",
+  "content" : "post centent",
   "author" : {
     "github" : "http://github.com/laracroft",
     "displayName" : "userName1",
@@ -295,22 +373,35 @@ exports.updatePostByPostIdAndAuthorId = function(body,aUTHOR_ID,pOST_ID) {
     "type" : "author",
     "url" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a"
   },
-  "origin" : "https://i-connect.herokuapp.com/",
-  "count" : 1,
-  "description" : "new post",
-  "source" : "https://i-connect.herokuapp.com/",
-  "published" : "2021-11-23T14:35:54.516186Z",
-  "type" : "post",
-  "title" : "this is a title",
-  "content" : "post centent",
+  "categories" : [ "c1", "c2" ],
+  "count" : 2,
+  "comments" : "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd",
   "commentSrc" : {
     "comments" : [ {
+      "author" : {
+        "github" : "http://github.com/laracroft",
+        "displayName" : "userName1",
+        "host" : "https://i-connect.herokuapp.com/",
+        "id" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a",
+        "profileImage" : "https://i.imgur.com/k7XVwpB.jpeg",
+        "type" : "author",
+        "url" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a"
+      },
       "comment" : "this is comment content",
       "published" : "2015-03-09T13:07:04+00:00",
       "id" : "id",
       "type" : "comment",
       "contentType" : "text/markdown"
     }, {
+      "author" : {
+        "github" : "http://github.com/laracroft",
+        "displayName" : "userName1",
+        "host" : "https://i-connect.herokuapp.com/",
+        "id" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a",
+        "profileImage" : "https://i.imgur.com/k7XVwpB.jpeg",
+        "type" : "author",
+        "url" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a"
+      },
       "comment" : "this is comment content",
       "published" : "2015-03-09T13:07:04+00:00",
       "id" : "id",
@@ -323,10 +414,9 @@ exports.updatePostByPostIdAndAuthorId = function(body,aUTHOR_ID,pOST_ID) {
     "id" : "https://i-connect.herokuapp.com/service/author/b049e294-7850-4e6b-8222-a20533074947/posts/9754714d-5d45-40b8-80e3-07e102ff59fd/comments",
     "type" : "comments"
   },
-  "unlisted" : false,
-  "id" : "046b6c7f-0b8a-43b9-b35d-6489e6daee91",
-  "categories" : [ "c1", "c2" ],
-  "contentType" : "text/plain"
+  "published" : "2021-11-23T14:35:54.516186Z",
+  "visibility" : "PUBLIC",
+  "unlisted" : false
 };
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);

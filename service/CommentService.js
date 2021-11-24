@@ -13,6 +13,15 @@ exports.authorAUTHOR_IDPostsPOST_IDCommentsPOST = function(body,aUTHOR_ID,pOST_I
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = {
+  "author" : {
+    "github" : "http://github.com/laracroft",
+    "displayName" : "userName1",
+    "host" : "https://i-connect.herokuapp.com/",
+    "id" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a",
+    "profileImage" : "https://i.imgur.com/k7XVwpB.jpeg",
+    "type" : "author",
+    "url" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a"
+  },
   "comment" : "this is comment content",
   "published" : "2015-03-09T13:07:04+00:00",
   "id" : "id",
@@ -40,12 +49,30 @@ exports.createCommentByProvidedUserAndPost = function(aUTHOR_ID,pOST_ID) {
     var examples = {};
     examples['application/json'] = {
   "comments" : [ {
+    "author" : {
+      "github" : "http://github.com/laracroft",
+      "displayName" : "userName1",
+      "host" : "https://i-connect.herokuapp.com/",
+      "id" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a",
+      "profileImage" : "https://i.imgur.com/k7XVwpB.jpeg",
+      "type" : "author",
+      "url" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a"
+    },
     "comment" : "this is comment content",
     "published" : "2015-03-09T13:07:04+00:00",
     "id" : "id",
     "type" : "comment",
     "contentType" : "text/markdown"
   }, {
+    "author" : {
+      "github" : "http://github.com/laracroft",
+      "displayName" : "userName1",
+      "host" : "https://i-connect.herokuapp.com/",
+      "id" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a",
+      "profileImage" : "https://i.imgur.com/k7XVwpB.jpeg",
+      "type" : "author",
+      "url" : "https://i-connect.herokuapp.com/service/author/625bc8b7-0ce0-420a-a4b4-ce1e70046e6a"
+    },
     "comment" : "this is comment content",
     "published" : "2015-03-09T13:07:04+00:00",
     "id" : "id",
